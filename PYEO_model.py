@@ -20,13 +20,13 @@ import pdb
 # In[3]:
 
 
-from tpot import TPOTClassifier
-import pandas as pd
+#from tpot import TPOTClassifier
+#import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline, make_union
-from tpot.builtins import StackingEstimator
+#from tpot.builtins import StackingEstimator
 
 
 # In[4]:
