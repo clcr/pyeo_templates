@@ -237,7 +237,7 @@ def train_model_rf(features,classes):
     min_samples_split=16, n_estimators=100, n_jobs=-1, class_weight='balanced')
     model.fit(features, classes)
     scores = cross_val_score(model, features, classes, cv=5)
-    return model, score
+    return model, scores
 
 
 # In[ ]:
