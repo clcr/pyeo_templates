@@ -15,18 +15,18 @@ import scipy.sparse as sp
 import pickle
 import csv
 import pdb
-
+import matplotlib.pyplot as plt 
 
 # In[3]:
 
 
-#from tpot import TPOTClassifier
-#import pandas as pd
+from tpot import TPOTClassifier
+import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline, make_union
-#from tpot.builtins import StackingEstimator
+from tpot.builtins import StackingEstimator
 
 
 # In[4]:
@@ -223,10 +223,10 @@ def summarise_training(in_classes,out_csv, sumarise_type = 'count'):
 
 
 def train_model(features,classes, model_format):
-    model = model
+    model = model_format
     model.fit(features, classes)
-    scores = cross_val_score(model, features, classes, cv=cross_val_repeats)
-    return model, score
+    scores = cross_val_score(model, features, classes, cv=5)
+    return model, scores
 
 
 # In[ ]:
@@ -337,7 +337,17 @@ def validate_classes(inRaster, shpdir, field_name='GRID_CODE', out_fldr=' ',noda
 
 
 # In[ ]:
-
+def show_satellite_image(image_path):
+    img = gdal.Open(image_path)
+    array = img.GetVirtualMemArray()
+    if len(array.shape) >= 3:
+        img_view = array.transpose([1,2,0])
+    else:
+        img_view = array
+    plt.imshow(img_view)
+    img_view = None
+    array = None
+    img = None
 
 
 
