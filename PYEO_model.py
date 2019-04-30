@@ -242,6 +242,18 @@ def train_model_rf(features,classes):
 
 # In[ ]:
 
+def train_model_tpot(features,classes,outmodel,generations=5,population_size=20):
+    model = TPOTClassifier(generations=generations, population_size=population_size, verbosity=2, n_jobs=-1)
+    Xtrain, Xtest, Ytrain, Ytest =train_test_split(features,classes, train_size=0.75, test_size=0.25)
+    
+    model.fit(Xtrain,Ytrain)
+    scores =model.score(Xtest,Ytest)
+    print('TPOT model scores: '+ str(scores))
+    print('saving model to: ' + outmodel)
+    model.export(outmodel)
+    return model, scores
+  
+# In[ ]:
 
 def getallinfo(g):
     (x_min, pixel_width, rotation, y_max, rotation, pixel_height) = g.GetGeoTransform()
